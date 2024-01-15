@@ -43,7 +43,11 @@ function updateMap(data) {
   
   theMarker = L.marker([data.lat, data.lon], { icon: busIcon }).addTo(mymap);
   
-  theMarker.bindPopup("<p>Latitude: <b>" + data.lat + "</b><br/>Longitude: <b>" + data.lon + "</b></p>").openPopup();
+  theMarker.bindPopup(
+  	"<p>Latitude: <b>" + data.lat +
+  	"</b><br/>Longitude: <b>" + data.lon + 
+  	"</b><br/>Battery: <b>" + data.battery_voltage / 1000 + "V" +
+  	"</b></p>").openPopup();
 }
 
 // Connect to the MQTT broker
