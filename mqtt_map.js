@@ -22,6 +22,19 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	attribution: '© OpenStreetMap'
 }).addTo(mymap);
 
+function convertDDToDMS(D, lng) {
+  return {
+    dir: D < 0 ? (lng ? "W" : "S") : lng ? "E" : "N",
+    deg: 0 | (D < 0 ? (D = -D) : D),
+    min: 0 | (((D += 1e-9) % 1) * 60),
+		sec: (0 | (((D * 60) % 1) * 6000)) / 100,
+  };
+}
+
+function formatDMS(dms) {
+	return dms.deg + "°" + dms.min + "'" + dms.sec + '"' + dms.dir;
+}
+
 // Function to handle incoming MQTT messages
 function onMessageArrived(message) {
     try {
@@ -41,13 +54,15 @@ function updateMap(data) {
 		mymap.removeLayer(theMarker);
   };
   
-  theMarker = L.marker([data.lat, data.lon], { icon: busIcon }).addTo(mymap);
+  var theMarker = L.marker([data.lat, data.lon], { icon: busIcon }).addTo(mymap);
+  var rssi = Number(data.csq.substring(0, data.csq.indexOf(","))) * 2 - 113;
   
   theMarker.bindPopup(
-  	"<p>Latitude: <b>" + data.lat +
-  	"</b><br/>Longitude: <b>" + data.lon + 
-  	"</b><br/>Battery: <b>" + data.battery_voltage / 1000 + "V" +
-  	"</b></p>").openPopup();
+  	"<p>Latitude: <b>" + formatDMS(convertDDToDMS(data.lat, false)) + "</b>" +
+  	"<br/>Longitude: <b>" + formatDMS(convertDDToDMS(data.lon, true)) + "</b>" +
+  	"<br/>RSSI: <b>" + rssi + "dBm" + "</b>" +
+  	"<br/>Battery: <b>" + data.battery_voltage / 1000 + "V" + "</b>" +
+  	"</p>").openPopup();
 }
 
 // Connect to the MQTT broker
