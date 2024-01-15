@@ -29,26 +29,21 @@ function onMessageArrived(message) {
         const data = JSON.parse(message.toString())
         console.log("Received data:", data);
 
-        // Extract GPS coordinates
-        const latitude = data.lat;
-        const longitude = data.lon;
-
-        // Plot the data on the map
-        if (latitude !== undefined && longitude !== undefined) {
-            updateMap(latitude, longitude);
-        }
+				updateMap(data);
     } catch (error) {
         console.error("Error decoding JSON:", error);
     }
 }
 
 // Function to update the map with new GPS coordinates
-function updateMap(latitude, longitude) {
+function updateMap(data) {
 	if (theMarker != undefined) {
 		mymap.removeLayer(theMarker);
   };
   
-  theMarker = L.marker([latitude, longitude], { icon: busIcon }).addTo(mymap);
+  theMarker = L.marker([data.lat, data.lon], { icon: busIcon }).addTo(mymap);
+  
+  theMarker.bindPopup("<p>Latitude: <b>" + data.lat + "</b><br/>Longitude: <b>" + data.lon + "</b></p>").openPopup();
 }
 
 // Connect to the MQTT broker
@@ -56,7 +51,7 @@ client.on("connect", () => {
 	console.log("Connected to MQTT broker");
   client.subscribe("a7670/860470067520241", (err) => {
     if (!err) {
-      console.log("Subscribed to topic")
+      console.log("Subscribed to topic a7670/860470067520241")
     }
   });
 });
