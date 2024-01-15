@@ -4,8 +4,6 @@ const client = mqtt.connect("wss://zae6a16b.ala.us-east-1.emqxsl.com:8084/mqtt",
 	password: "a7670SIM"
 });
 
-var theMarker = {};
-
 var busIcon = L.icon({
     iconUrl: 'bus.png', // Replace with the path to your bus icon
     iconSize: [32, 32], // Adjust the size of your icon
@@ -21,6 +19,8 @@ const mymap = L.map('map', {
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	attribution: '© OpenStreetMap'
 }).addTo(mymap);
+
+const layerGroup = L.layerGroup().addTo(mymap);
 
 function convertDDToDMS(D, lng) {
   return {
@@ -50,11 +50,9 @@ function onMessageArrived(message) {
 
 // Function to update the map with new GPS coordinates
 function updateMap(data) {
-	if (theMarker != undefined) {
-		mymap.removeLayer(theMarker);
-  };
-  
-  var theMarker = L.marker([data.lat, data.lon], { icon: busIcon }).addTo(mymap);
+	layerGroup.clearLayers();
+	
+  var theMarker = L.marker([data.lat, data.lon], { icon: busIcon });
   var rssi = Number(data.csq.substring(0, data.csq.indexOf(","))) * 2 - 113;
   
   theMarker.bindPopup(
@@ -63,6 +61,8 @@ function updateMap(data) {
   	"<br/>RSSI: <b>" + rssi + "dBm" + "</b>" +
   	"<br/>Battery: <b>" + data.battery_voltage / 1000 + "V" + "</b>" +
   	"</p>").openPopup();
+  	
+  	layerGroup.addLayer(theMarker);
 }
 
 // Connect to the MQTT broker
