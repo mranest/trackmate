@@ -22,17 +22,17 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 const layerGroup = L.layerGroup().addTo(mymap);
 
-function convertDDToDMS(D, lng) {
+function convertDDToDMS(D/*, lng */) {
   return {
-    dir: D < 0 ? (lng ? "W" : "S") : lng ? "E" : "N",
+//     dir: D < 0 ? (lng ? "W" : "S") : lng ? "E" : "N",
     deg: 0 | (D < 0 ? (D = -D) : D),
     min: 0 | (((D += 1e-9) % 1) * 60),
 		sec: (0 | (((D * 60) % 1) * 6000)) / 100,
   };
 }
 
-function formatDMS(dms) {
-	return dms.deg + "°" + dms.min + "'" + dms.sec + '"' + dms.dir;
+function formatDMS(dms, nseq) {
+	return dms.deg + "°" + dms.min + "'" + dms.sec + '"' + nsew;
 }
 
 // Function to handle incoming MQTT messages
