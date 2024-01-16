@@ -32,7 +32,7 @@ function convertDDToDMS(D/*, lng */) {
   };
 }
 
-function formatDMS(dms, nseq) {
+function formatDMS(dms, nsew) {
 	return dms.deg + "°" + dms.min + "'" + dms.sec + '"' + nsew;
 }
 
