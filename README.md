@@ -4,6 +4,7 @@
 
 - Store last message received in browser LocalStorage
 - Setup persistent session when connecting to MQTT, to get all missed messages
+- Remove hard coded credentials (prompt and store them in LocalStorage)
 
 ### IoT side
 
