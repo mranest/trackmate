@@ -52,13 +52,13 @@ function onMessageArrived(message) {
 function updateMap(data) {
 	layerGroup.clearLayers();
 	
-  var rssi = Number(data.csq.substring(0, data.csq.indexOf(","))) * 2 - 113;
+  // var rssi = Number(data.csq.substring(0, data.csq.indexOf(","))) * 2 - 113;
 
   var theMarker = L.marker([data.lat, data.lon], { icon: busIcon });
   var thePopup = theMarker.bindPopup(
   	"<p>Latitude: <b>" + formatDMS(convertDDToDMS(data.lat, false)) + "</b>" +
   	"<br/>Longitude: <b>" + formatDMS(convertDDToDMS(data.lon, true)) + "</b>" +
-  	"<br/>RSSI: <b>" + rssi + "dBm" + "</b>" +
+  	//"<br/>RSSI: <b>" + rssi + "dBm" + "</b>" +
   	"<br/>Battery: <b>" + data.battery_voltage / 1000 + "V" + "</b>" +
   	"</p>");
   
