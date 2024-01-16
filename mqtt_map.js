@@ -6,8 +6,8 @@ const client = mqtt.connect("wss://zae6a16b.ala.us-east-1.emqxsl.com:8084/mqtt",
 
 var busIcon = L.icon({
     iconUrl: 'bus.png', // Replace with the path to your bus icon
-    iconSize: [32, 32], // Adjust the size of your icon
-    iconAnchor: [16, 16], // Adjust the anchor point if needed
+    iconSize: [48, 48], // Adjust the size of your icon
+    iconAnchor: [32, 32], // Adjust the anchor point if needed
     popupAnchor: [0, -16] // Adjust the popup anchor point if needed
 });
 
