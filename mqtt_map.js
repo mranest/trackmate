@@ -56,8 +56,8 @@ function updateMap(data) {
 
   var theMarker = L.marker([data.lat, data.lon], { icon: busIcon });
   var thePopup = theMarker.bindPopup(
-  	"<p>Latitude: <b>" + formatDMS(convertDDToDMS(data.lat, false)) + "</b>" +
-  	"<br/>Longitude: <b>" + formatDMS(convertDDToDMS(data.lon, true)) + "</b>" +
+  	"<p>Latitude: <b>" + formatDMS(convertDDToDMS(data.lat), data.ns) + "</b>" +
+  	"<br/>Longitude: <b>" + formatDMS(convertDDToDMS(data.lon), data.ew) + "</b>" +
   	//"<br/>RSSI: <b>" + rssi + "dBm" + "</b>" +
   	"<br/>Battery: <b>" + data.battery_voltage / 1000 + "V" + "</b>" +
   	"</p>");
