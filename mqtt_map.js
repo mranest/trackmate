@@ -92,7 +92,8 @@ client.on("connect", () => {
 // Set up MQTT client callbacks
 client.on("message", (topic, message) => {
 	if (topic === "will/860470067520241") {
-		console.log(message);
+		console.log(message.toString());
+	} else {
+		onMessageArrived(message);
 	}
-	onMessageArrived(message);
 });
