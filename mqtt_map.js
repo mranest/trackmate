@@ -82,9 +82,17 @@ client.on("connect", () => {
       console.log("Subscribed to topic gnss/860470067520241")
     }
   });
+  client.subscribe("will/860470067520241", (err) => {
+    if (!err) {
+      console.log("Subscribed to topic will/860470067520241")
+    }
+  });
 });
 
 // Set up MQTT client callbacks
 client.on("message", (topic, message) => {
+	if (topic === "will/860470067520241") {
+		console.log(message);
+	}
 	onMessageArrived(message);
 });
