@@ -1,4 +1,10 @@
 // Connect to MQTT broker
+var clientId = localStorage.getItem("clientId")
+if (clienId == null) {
+	clientId = crypto.randomUUID();
+	localStorage.setItem("clientId", clientId);
+}
+
 const client = mqtt.connect("wss://zae6a16b.ala.us-east-1.emqxsl.com:8084/mqtt", {
 	username: "a7670",
 	password: "a7670SIM",
