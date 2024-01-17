@@ -77,9 +77,9 @@ function updateMap(data) {
 // Connect to the MQTT broker
 client.on("connect", () => {
 	console.log("Connected to MQTT broker");
-  client.subscribe("a7670/860470067520241", (err) => {
+  client.subscribe("gnss/860470067520241", (err) => {
     if (!err) {
-      console.log("Subscribed to topic a7670/860470067520241")
+      console.log("Subscribed to topic gnss/860470067520241")
     }
   });
 });
