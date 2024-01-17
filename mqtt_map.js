@@ -67,6 +67,7 @@ function updateMap(data) {
   	"<br/>Speed: <b>" + data.speed + "km/h" + "</b>" +
   	"<br/>RSSI: <b>" + data.rssi + "dBm" + "</b>" +
   	"<br/>Battery: <b>" + data.battery_voltage / 1000 + "V" + "</b>" +
+  	"<br/>Timestamp: <b>" + new Date(Date.parse(data.timestamp)).toLocaleTimeString() + "</b>" +
   	"</p>");
   
   layerGroup.addLayer(theMarker);  	
