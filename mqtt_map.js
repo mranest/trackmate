@@ -64,8 +64,9 @@ function updateMap(data) {
   var thePopup = theMarker.bindPopup(
   	"<p>Latitude: <b>" + formatDMS(convertDDToDMS(data.lat), data.ns) + "</b>" +
   	"<br/>Longitude: <b>" + formatDMS(convertDDToDMS(data.lon), data.ew) + "</b>" +
-  	"<br/>Speed: <b>" + data.speed + "km/h" + "</b>" +
-  	"<br/>RSSI: <b>" + data.rssi + "dBm" + "</b>" +
+  	"<br/>HDOP: <b>" + data.hdop + "</b>" +
+  	"<br/>Speed: <b>" + data.speed + "km/h</b>" +
+  	"<br/>RSSI: <b>" + data.rssi + "dBm</b>" +
   	"<br/>Battery: <b>" + data.battery_voltage / 1000 + "V" + "</b>" +
   	"<br/>Timestamp: <b>" + new Date(Date.parse(data.timestamp)).toLocaleTimeString() + "</b>" +
   	"</p>");
