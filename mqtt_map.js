@@ -43,6 +43,22 @@ function formatDMS(dms, nsew) {
 	return dms.deg + "°" + dms.min + "'" + dms.sec + '"' + nsew;
 }
 
+function formatGDOP(gdop) {
+	if (gdop < 1) {
+		return "Ideal";
+	} else if (gdop < 2) {
+		return "Excellent";
+	} else if (gdop < 5) {
+		return "Good";
+	} else if (gdop < 10) {
+		return "Moderate";
+	} else if (gdop < 20) {
+		return "Fair";
+	} else {
+		return "Poor";
+	}
+}
+
 // Function to handle incoming MQTT messages
 function onMessageArrived(message) {
     try {
@@ -64,7 +80,7 @@ function updateMap(data) {
   var thePopup = theMarker.bindPopup(
   	"<p>Latitude: <b>" + formatDMS(convertDDToDMS(data.lat), data.ns) + "</b>" +
   	"<br/>Longitude: <b>" + formatDMS(convertDDToDMS(data.lon), data.ew) + "</b>" +
-  	"<br/>GDOP: <b>" + data.gdop + "</b>" +
+  	"<br/>GDOP: <b>" + formatGDOP(data.gdop) + "</b>" +
   	"<br/>Speed: <b>" + data.speed + "km/h</b>" +
   	"<br/>RSSI: <b>" + data.rssi + "dBm</b>" +
   	"<br/>Battery: <b>" + data.battery_voltage / 1000 + "V" + "</b>" +
