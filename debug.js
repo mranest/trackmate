@@ -60,3 +60,11 @@ client.on("offline", () => {
 client.on("error", (error) => {
     consoleOutput("Error: " + error);
 });
+
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+        consoleOutput('Device unlocked');
+    } else {
+        consoleOutput('Device locked');
+    }
+});
