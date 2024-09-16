@@ -20,14 +20,14 @@ const client = mqtt.connect("wss://montessoriani-lab.georgiadis.online:8084/", {
 // Connect to the MQTT broker
 client.on("connect", () => {
     consoleOutput("Connected to MQTT broker");
-    client.subscribe("gnss/860470067520241", (err) => {
+    client.subscribe("gnss/860470067520241", {"qos": 1}, (err) => {
         if (!err) {
-            consoleOutput("Subscribed to topic gnss/860470067520241")
+            consoleOutput("Subscribed to topic gnss/860470067520241; qos=1")
         }
     });
-    client.subscribe("will/860470067520241", (err) => {
+    client.subscribe("will/860470067520241", {"qos": 1}, (err) => {
         if (!err) {
-            consoleOutput("Subscribed to topic will/860470067520241")
+            consoleOutput("Subscribed to topic will/860470067520241; qos=1")
         }
     });
 });
