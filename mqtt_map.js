@@ -94,12 +94,12 @@ function updateMap(data) {
 // Connect to the MQTT broker
 client.on("connect", () => {
     console.log("Connected to MQTT broker");
-    client.subscribe("gnss/860470067520241", (err) => {
+    client.subscribe("gnss/860470067520241", {"qos": 1}, (err) => {
         if (!err) {
             console.log("Subscribed to topic gnss/860470067520241")
         }
     });
-    client.subscribe("will/860470067520241", (err) => {
+    client.subscribe("will/860470067520241", {"qos": 1}, (err) => {
         if (!err) {
             console.log("Subscribed to topic will/860470067520241")
         }
@@ -124,7 +124,7 @@ if ('geolocation' in navigator) {
         // map.setView([userLat, userLng], 13);
 
         // Add a marker at the user's location
-        L.marker([userLat, userLng]).addTo(mymap);
+        //L.marker([userLat, userLng]).addTo(mymap);
 
         L.circle([userLat, userLng], {
             color: 'red',
